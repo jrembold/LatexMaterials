@@ -1,0 +1,103 @@
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+%\usepackage{sfmath}
+
+\usetikzlibrary{patterns, decorations.pathmorphing, calc}
+
+% Units
+\newcommand{\mps}{\si{\meter\per\second}}
+
+% Common Math Declarations
+\newcommand{\mom}{\va{p}}
+\newcommand{\force}{\va{F}}
+\newcommand{\vel}{\va{v}}
+\newcommand{\acc}{\va{a}}
+\newcommand{\pos}{\va{r}}
+\newcommand{\rhat}{\vu{r}}
+\newcommand{\amom}{\va{L}}
+\newcommand{\trq}{\va*{\tau}}
+\newcommand{\rot}{\va*{\omega}}
+\newcommand{\ef}{\va{E}}
+\newcommand{\mf}{\va{B}}
+\newcommand{\current}{\mathrm{I}}
+\newcommand{\emf}{\mathcal{E}}
+
+\newcommand{\vc}[1]{\expval{#1}}
+\newcommand{\dt}[1]{\dv{#1}{t}}
+
+% Tikz Styles
+\tikzstyle{nosep} = [inner sep=0pt, outer sep=0pt]
+\tikzstyle{point}[2mm] = [circle, fill=black, inner sep=0pt, outer sep=2pt, minimum size=#1]
+\tikzstyle{force} = [red, ultra thick, -latex]
+\tikzstyle{vel} = [green, ultra thick, -latex]
+\tikzstyle{ground}[1cm] = [pattern=north east lines, minimum width=#1, minimum height=3mm, inner sep=0pt, outer sep=0pt, transform shape]
+\tikzstyle{wall}[1cm] = [pattern=north east lines, minimum height=#1, minimum width=3mm, inner sep=0pt, outer sep=0pt, transform shape]
+\tikzstyle{block}[red!50] = [draw, ultra thick, fill=#1, rounded corners, minimum size=1cm, inner sep=0pt, outer sep=0pt, transform shape]
+\tikzstyle{spring}[2mm] = [decorate, decoration={coil, aspect=0.3, segment length=#1, amplitude=3mm}, very thick]
+\tikzstyle{ball}[red!50] = [circle, ball color=#1, inner sep=0pt, outer sep=0pt, minimum size=1cm]
+\tikzstyle{math}=[execute at begin node={$\displaystyle}, execute at end node={$}]
+\tikzset{
+  double arrow/.style args={#1 colored by #2 and #3}{
+    -stealth,line width=#1,#2, % first arrow
+    postaction={draw,-stealth,#3,line width=(#1)/3,
+                shorten <=(#1)/3,shorten >=2*(#1)/3}, % second arrow
+  }
+}
+\tikzset{->-/.style={decoration={
+			markings,
+	mark=at position #1 with {\arrow{latex}}}, postaction={decorate}}
+}
+\tikzset{pics/battery/.style={
+		code={
+			\draw[top color=orange!40, bottom color=orange!40, middle color=white] (-2,-1) rectangle (2,1);
+			\draw[fill=gray!50] (2,-.25) rectangle (2.25,.25);
+			\coordinate (ppos) at (1.5,0);
+			\draw[red, ultra thick] (ppos)++(-2mm,0)--+(4mm,0) (ppos)++(0,-2mm)--+(0,4mm);
+			\coordinate (npos) at (-1.5,0);
+			\draw[blue, ultra thick] (npos)++(0,-2mm)--+(0,4mm);
+			\node[inner sep=0pt, outer sep=0pt] (-neg) at (-2,0) {};
+			\node[inner sep=0pt, outer sep=0pt] (-pos) at (2.25,0) {};
+			\node[inner sep=0pt, outer sep=0pt] (-cent) at (0,0) {};
+		}
+	}
+}
+
+\tikzset{pics/light/.style={
+		code={
+			\node[transform shape] at (0,0) {\includegraphics[width=1.5cm]{light.pdf}};
+			\node[inner sep=0pt, outer sep=0pt] (-p1) at (-1mm,-8mm) {};
+			\node[inner sep=0pt, outer sep=0pt] (-p2) at (1mm,-8mm) {};
+		}
+	}
+}
+\tikzset{pics/lightoff/.style={
+		code={
+			\node[transform shape] at (0,0) {\includegraphics[width=1.1cm]{lightoff.pdf}};
+			\node[inner sep=0pt, outer sep=0pt] (-p1) at (-1mm,-8mm) {};
+			\node[inner sep=0pt, outer sep=0pt] (-p2) at (1mm,-8mm) {};
+		}
+	}
+}
+\newcommand{\scurv}{ to[in=180,out=0, looseness=0.6] }
+
+
+\pgfplotsset{simple/.style={%
+  axis x line = middle,
+  axis y line = middle,
+  xtick = \empty,
+  ytick = \empty,
+  %every axis x label/.style={at={(current axis.right of origin)}, anchor=west},
+  %every axis y label/.style={at={(current axis.north west)}},
+  every axis x label/.style={at={(ticklabel* cs:1.02)}, anchor=west},
+  every axis y label/.style={at={(ticklabel* cs:1.02)}, anchor=south},
+}}
+
+% Slide Commands
+\newcommand{\exsol}[1]{
+	\begin{tikzpicture}[remember picture, overlay]
+		\node<2>[anchor=east, yshift=5mm, font=\scriptsize] at (current page.south east) {\textbf{Solution:} #1};
+	\end{tikzpicture}
+}
+

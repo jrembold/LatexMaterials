@@ -1,0 +1,46 @@
+\mode<presentation>
+
+% Any required packages
+\RequirePackage{tikz,etoolbox}
+\usetikzlibrary{positioning,calc}
+
+% Settings
+\useinnertheme{rounded}
+\useoutertheme{WU2}
+\usecolortheme{WU2}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{enumerate items}[default]
+
+\BeforeBeginEnvironment{frame}{
+	\setbeamercolor{background canvas}{bg=Background}
+	\setbeamertemplate{background}{}
+}
+%\defbeamertemplate{background}{normal}{
+  %\pgfuseimage{bg}
+%}
+%\defbeamertemplate{background}{example}{
+  %\pgfuseimage{bg_ex}
+%}
+\define@key{beamerframe}{example}[true]{
+	\setbeamercolor{background canvas}{bg=green!25}
+	\setbeamertemplate{background}{}
+}
+
+\AtBeginSection[]{
+	{
+	\setbeamertemplate{footline}{}
+	\begin{frame}[noframenumbering]
+		\begin{tikzpicture}[remember picture, overlay]
+			\fill[red] (current page.north west) rectangle (current page.south east);
+			\node[opacity=0.4, anchor=south east, inner sep=0pt, outer sep=0pt] at ([xshift=2cm]current page.south east) {\includegraphics[width=18cm]{section_background.png}};
+			\fill[Foreground, opacity=0.8] ([yshift=2cm]current page.west) rectangle ([yshift=1cm]current page.east);
+			\node[font=\LARGE, Background, anchor=west] at ([yshift=1.5cm, xshift=1cm]current page.west) {\insertsectionhead};
+			\node[font=\small, gold, anchor=south west] at ([yshift=2cm]current page.west) {Upcoming:};
+		\end{tikzpicture}
+	\end{frame}
+	}
+}
+
+\mode<all>
