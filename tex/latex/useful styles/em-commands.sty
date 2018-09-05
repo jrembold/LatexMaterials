@@ -2,17 +2,20 @@
 \usepackage{siunitx}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{tikz-3dplot}
 
 % Needed Tikz libraries
 \usetikzlibrary{patterns, decorations.pathmorphing, calc}
 
 % Common Physics Symbols
-\newcommand{\force}{\va{F}}
-\newcommand{\xhat}{\vu{x}}
-\newcommand{\yhat}{\vu{y}}
-\newcommand{\zhat}{\vu{z}}
-\newcommand{\rhat}{\vu{r}}
-\newcommand{\pos}{\va{r}}
+\newcommand{\force}{\va*{F}}
+\newcommand{\xhat}{\vu*{x}}
+\newcommand{\yhat}{\vu*{y}}
+\newcommand{\zhat}{\vu*{z}}
+\newcommand{\rhat}{\vu*{r}}
+\newcommand{\pos}{\va*{r}}
+\newcommand{\vell}{\va*{\ell}}
+\newcommand{\vA}{\va{A}}
 \newcommand{\srmag}{{\mbox{$\resizebox{.09in}{.08in}{\includegraphics[trim=1em 0 14em 0, clip]{ScriptR}}$}}}
 \newcommand{\srvec}{{\mbox{$\resizebox{.09in}{.08in}{\includegraphics[trim=1em 0 14em 0, clip]{BoldR}}$}}}
 \newcommand{\sr}{\va{\srvec}}
@@ -40,3 +43,8 @@
 			markings,
 	mark=at position #1 with {\arrow{latex}}}, postaction={decorate}}
 }
+
+\tikzstyle{xzplane}=[canvas is zx plane at y=#1]
+\tikzstyle{yzplane}=[canvas is zy plane at x=#1]
+\tikzstyle{xyplane}=[canvas is yx plane at z=#1]
+
