@@ -5,7 +5,7 @@
 \usepackage{tikz-3dplot}
 
 % Needed Tikz libraries
-\usetikzlibrary{patterns, decorations.pathmorphing, calc, intersections}
+\usetikzlibrary{patterns, decorations.pathmorphing, calc, intersections, hobby}
 
 % Common Physics Symbols
 \newcommand{\force}{\va*{F}}
@@ -50,3 +50,19 @@
 \tikzstyle{yzplane}=[canvas is zy plane at x=#1]
 \tikzstyle{xyplane}=[canvas is yx plane at z=#1]
 
+\tikzset{pics/plus/.style={
+		code={
+			\foreach \a in {0,90,180,270} {
+				\draw[ultra thick, line cap=round, Red] (0,0) -- +(\a:1.2mm);
+			}
+		}
+	}
+}
+\tikzset{pics/minus/.style={
+		code={
+			\foreach \a in {0,180} {
+				\draw[ultra thick, line cap=round, cyan] (0,0) -- +(\a:1.0mm);
+			}
+		}
+	}
+}
