@@ -70,3 +70,32 @@
 		}
 	}
 }
+\tikzset{pics/box/.style args={#1/#2/#3/#4}{
+		code={
+			% Giving names for clarity
+			\def\width{#2}
+			\def\height{#3}
+			\def\depth{#4}
+			% Defining corner nodes for outside use
+			\node[nosep] (-fbl) at (0,0,\depth) {};
+			\node[nosep] (-fbr) at (\width,0,\depth) {};
+			\node[nosep] (-ftl) at (0,\height,\depth) {};
+			\node[nosep] (-ftr) at (\width,\height,\depth) {};
+			\node[nosep] (-bbl) at (0,0,0) {};
+			\node[nosep] (-bbr) at (\width,0,0) {};
+			\node[nosep] (-btl) at (0,\height,0) {};
+			\node[nosep] (-btr) at (\width,\height,0) {};
+			\draw[very thick, fill=#1, line join=round]
+				(0,0,\depth) --++ (\width,0,0) --++ (0,\height,0) --++ (-\width,0,0) --cycle;
+			\draw[very thick, fill=#1!50, line join=round]
+				(0,\height,\depth) --++ (\width,0,0) --++ (0,0,-\depth) --++ (-\width,0,0) --cycle;
+			\draw[very thick, fill=#1!50!black, line join=round]
+				(\width,0,\depth) --++ (0,\height,0) --++ (0,0,-\depth) --++ (0,-\height,0) --cycle;
+			\draw[very thick, dashed]
+				(0,0,0) -- +(0,0,\depth) (0,0,0) -- +(\width,0,0) (0,0,0) -- +(0,\height,0);
+		}
+	},
+	% Defaults to a cyan cube
+	pics/box/.default=cyan/1/1/1
+}
+
