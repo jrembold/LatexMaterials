@@ -57,6 +57,13 @@
 			markings,
 	mark=at position #1 with {\arrow{latex}}}, postaction={decorate}}
 }
+\tikzset{->>-/.style args={#1 to #2 by #3}{
+		decoration={
+			markings,
+			mark = between positions #1 and #2 step #3 with {\arrow{latex}}
+		}, postaction={decorate}
+	}
+}
 
 \tikzstyle{xzplane}=[canvas is zx plane at y=#1]
 \tikzstyle{yzplane}=[canvas is zy plane at x=#1]
