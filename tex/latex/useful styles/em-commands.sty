@@ -29,6 +29,7 @@
 \newcommand{\mcur}{\mathcal{I}}
 \newcommand{\scd}{\va{K}}
 \newcommand{\vcd}{\va{J}}
+\newcommand{\vmag}{\va{M}}
 
 % Tikz Styles
 \tikzstyle{nosep} = [inner sep=0pt, outer sep=0pt]
@@ -112,5 +113,17 @@
 	},
 	% Defaults to a cyan cube
 	pics/box/.default=cyan/1/1/1
+}
+\tikzset{pics/cyl/.style args={#1/#2/#3}{
+		code = {
+			\def\rad{#2}
+			\pgfmathsetmacro{\tilt}{\rad/2}
+			\def\len{#3}
+			\draw[very thick, left color=#1!70, right color=#1]
+			(0,0)++(-\rad,0) coordinate(-lt) -- ++(0,-\len) coordinate (-lb) arc (180:360:\rad cm and \tilt cm) coordinate[pos=.5] (-b) coordinate (-rb) -- ++(0,\len) coordinate (-rt) -- cycle;
+			\draw[very thick, right color=#1!80, left color=#1!50] (0,0) ellipse (\rad cm and \tilt cm);
+		}
+	},
+	pics/cyl/.default=red/1/3
 }
 
