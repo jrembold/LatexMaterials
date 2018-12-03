@@ -31,6 +31,18 @@
 \newcommand{\vcd}{\va{J}}
 \newcommand{\vmag}{\va{M}}
 \newcommand{\af}{\va{H}}
+\newcommand{\emf}{\mathcal{E}}
+
+% New Tikz Commands
+\newcommand{\unifield}[4]{
+	\fill[#4] (-.5,-.5) rectangle (#1+.5,#2+.5);
+	\foreach \x in {0,1,...,#1}{
+		\foreach \y in {0,1,...,#2}{
+			\node at (\x,\y) {#3};
+		}
+	}
+}
+
 
 % Tikz Styles
 \tikzstyle{nosep} = [inner sep=0pt, outer sep=0pt]
