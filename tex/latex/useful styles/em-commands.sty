@@ -71,6 +71,10 @@
 			markings,
 	mark=at position #1 with {\arrow{latex}}}, postaction={decorate}}
 }
+\tikzset{-<-/.style={decoration={
+			markings,
+	mark=at position #1 with {\arrow[rotate=180]{latex}}}, postaction={decorate}}
+}
 \tikzset{->>-/.style args={#1 to #2 by #3}{
 		decoration={
 			markings,
