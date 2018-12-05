@@ -33,6 +33,16 @@
 \newcommand{\af}{\va{H}}
 \newcommand{\emf}{\mathcal{E}}
 
+% New Tikz Commands
+\newcommand{\unifield}[4]{
+	\fill[#4] (-.5,-.5) rectangle (#1+.5,#2+.5);
+	\foreach \x in {0,1,...,#1}{
+		\foreach \y in {0,1,...,#2}{
+			\node at (\x,\y) {#3};
+		}
+	}
+}
+
 % Tikz Styles
 \tikzstyle{nosep} = [inner sep=0pt, outer sep=0pt]
 \tikzstyle{point}[2mm] = [circle, fill=black, inner sep=0pt, outer sep=2pt, minimum size=#1]
@@ -59,6 +69,10 @@
 \tikzset{->-/.style={decoration={
 			markings,
 	mark=at position #1 with {\arrow{latex}}}, postaction={decorate}}
+}
+\tikzset{-<-/.style={decoration={
+			markings,
+	mark=at position #1 with {\arrow[rotate=180]{latex}}}, postaction={decorate}}
 }
 \tikzset{->>-/.style args={#1 to #2 by #3}{
 		decoration={
