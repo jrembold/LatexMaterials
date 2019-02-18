@@ -1,0 +1,62 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{WU222Lab}[2019 Willamette 222 Lab Style Commands]
+
+\RequirePackage[usenames,dvipsnames]{xcolor}
+\RequirePackage[margin=0.75in]{geometry}
+\RequirePackage{etoolbox}
+\RequirePackage[lighttt]{lmodern}
+\RequirePackage{textcomp}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{listings}
+\RequirePackage{lstautogobble}
+
+
+% TA Notes Toggle
+\newtoggle{forTA}
+\DeclareOption{TA}{\toggletrue{forTA}}
+\ProcessOptions\relax
+
+% Checkpoint counter for easy reference
+\newcounter{Checkpoint}
+\addtocounter{Checkpoint}{1}
+
+% Coding environments
+\lstnewenvironment{pythonCode}[1][language=python]{
+	\lstset{frame=none,
+			backgroundcolor=\color{gray!10},
+			basicstyle=\ttfamily\color{RedOrange},
+			autogobble,
+			tabsize=4,
+			commentstyle=\color{RedOrange!50!black},
+			showstringspaces=false,
+			language=python,
+			upquote=true,
+			#1
+	}}{}
+\newcommand{\inlinePython}[1]{\textcolor{RedOrange}{\texttt{#1}}}
+
+% TA environments
+\newcommand{\tanotes}[1]{
+	\iftoggle{forTA}{
+		\par
+		\begin{center}
+			\framebox[6.5in]{\parbox{6.25in}{{\Large \textbf{TA Notes}:}\\ #1}}
+		\end{center}
+	}
+}
+
+% Checkpoint environment
+\newcommand{\checkpoint}[1]{
+	\par
+	\begin{center}
+		\framebox[6.5in]{\parbox{6.25in}{\textcolor{RoyalBlue}{{\Large\textbf{Checkpoint \arabic{Checkpoint}}:}\\ #1}}}
+	\end{center}
+	\stepcounter{Checkpoint}
+}
+
+% Convenience Commands
+\newcommand{\Glowscript}{\href{http://www.glowscript.org}{Glowscript }}
+\newcommand{\numvec}[1]{$\langle {#1} \rangle$}
+\newcommand{\Class}{Physics 222}
+\newcommand{\emphasize}[1]{\textcolor{RoyalBlue}{\textbf{#1}}}
+
