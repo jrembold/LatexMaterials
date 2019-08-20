@@ -1,0 +1,28 @@
+\documentclass[tikz]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[gobble=auto]{pythontex}
+\def\getrandomletter{\pgfmathrandominteger{\mytemp}{1}{26}\AlphAlph{\mytemp}}
+\definecolor{Blue}{HTML}{21BFC2}
+\definecolor{Green}{HTML}{09F7A0}
+\definecolor{Teal}{HTML}{27D796}
+\definecolor{Red}{HTML}{F43E5C}
+\definecolor{Orange}{HTML}{FAB28E}
+\definecolor{Purple}{HTML}{6C6F93}
+\definecolor{DGray}{HTML}{1A1C23}
+\begin{document}
+\begin{tikzpicture}
+	\begin{pycode}
+	import numpy as np
+	import string
+	import random as rnd
+
+	for i in np.arange(0.3,16,0.3):
+		size = rnd.choice([r'\large', r'\normalsize', r'\footnotesize', r'\tiny'])
+		col = rnd.choice(['Blue', 'Green', 'Red', 'Orange', 'Purple'])
+		length = rnd.choice(np.arange(1,2.5,0.1))
+		for j in np.arange(0,-length/(i**0.4),-0.3):
+			y = rnd.choice(string.ascii_letters+string.digits)
+			print(r'\node[{},font={}, opacity=0.5] at ({:0.2f}cm,{:0.2f}cm) {{{}}};'.format(col,size,i,j,y))
+	\end{pycode}
+\end{tikzpicture}
+\end{document}
