@@ -1,0 +1,115 @@
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tikz-3dplot}
+\usepackage{listings}
+\usepackage{lstautogobble}
+\usepackage{textcomp}
+
+\pgfplotsset{compat=1.16}
+
+% Needed Tikz libraries
+\usetikzlibrary{patterns, decorations.pathmorphing, calc, intersections, hobby, decorations.markings}
+
+\definecolor{Blue}{HTML}{21BFC2}
+\definecolor{Green}{HTML}{09F7A0}
+\definecolor{Teal}{HTML}{27D796}
+\definecolor{Red}{HTML}{F43E5C}
+\definecolor{Orange}{HTML}{FAB28E}
+\definecolor{Purple}{HTML}{6C6F93}
+\definecolor{DGray}{HTML}{1A1C23}
+
+
+\definecolor{SynBlue}{HTML}{1D8991}
+\definecolor{SynPurple}{HTML}{8931B9}
+\definecolor{SynRed}{HTML}{DA103F}
+\definecolor{SynDOrange}{HTML}{DC3318}
+\definecolor{SynOrange}{HTML}{F6661E}
+\definecolor{SynYellow}{HTML}{F77D26}
+
+\definecolor{LightBG}{HTML}{FDF0ED}
+
+\lstdefinestyle{full}{
+			backgroundcolor= \color{gray!20},
+			basicstyle=\ttfamily,
+			autogobble,
+			tabsize=4,
+			language=python,
+			upquote=true,
+			commentstyle= \color{SynBlue}\itshape,
+			keywordstyle=\color{SynRed}\bfseries,
+			showstringspaces=false,
+			stringstyle=\color{SynPurple},
+			literate=%
+			{0}{{{\color{SynOrange}0}}}1
+			{1}{{{\color{SynOrange}1}}}1
+			{2}{{{\color{SynOrange}2}}}1
+			{3}{{{\color{SynOrange}3}}}1
+			{4}{{{\color{SynOrange}4}}}1
+			{5}{{{\color{SynOrange}5}}}1
+			{6}{{{\color{SynOrange}6}}}1
+			{7}{{{\color{SynOrange}7}}}1
+			{8}{{{\color{SynOrange}8}}}1
+			{9}{{{\color{SynOrange}9}}}1,
+			numbers=left,
+			numberstyle=\color{gray},
+}
+
+\lstdefinestyle{basic}{
+			basicstyle=\ttfamily,
+			autogobble,
+			tabsize=4,
+			language=python,
+			upquote=true,
+			commentstyle= \color{Blue}\itshape,
+			keywordstyle=\color{Red}\bfseries,
+			showstringspaces=false,
+			stringstyle=\color{SynPurple},
+			numbers=none,
+			numberstyle=\color{gray},
+			literate=,
+}
+
+\lstdefinestyle{min}{
+			basicstyle=\ttfamily,
+			autogobble,
+			tabsize=4,
+			upquote=true,
+			showstringspaces=false,
+			commentstyle= \color{black}\itshape,
+			keywordstyle=\color{black}\bfseries,
+			showstringspaces=false,
+			stringstyle=\color{black},
+			numbers=none,
+			numberstyle=\color{black},
+			literate=,
+}
+
+\lstdefinestyle{special}{
+			basicstyle=\ttfamily,
+			autogobble,
+			tabsize=4,
+			upquote=true,
+			showstringspaces=false,
+			commentstyle=,
+			keywordstyle=,
+			showstringspaces=false,
+			stringstyle=,
+			numbers=none,
+			numberstyle=,
+			literate=,
+			moredelim=**[is][\color{SynBlue}]{|}{|},
+}
+
+\lstnewenvironment{pythoncode}[1][language=python]{
+	\lstset{frameround = Fttt,
+		style = full,
+		#1,
+	}
+}{}
+
+\newcommand{\pyi}[2][full]{%
+	\lstset{style=#1}%
+	\lstinline{#2}%
+}
