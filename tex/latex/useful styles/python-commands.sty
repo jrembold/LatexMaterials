@@ -56,7 +56,7 @@
 			numberstyle=\color{gray},
 }
 
-\lstdefinestyle{basic}{
+\lstdefinestyle{basic}{%
 			basicstyle=\ttfamily,
 			autogobble,
 			tabsize=4,
@@ -71,7 +71,7 @@
 			literate=,
 }
 
-\lstdefinestyle{min}{
+\lstdefinestyle{min}{%
 			basicstyle=\ttfamily,
 			autogobble,
 			tabsize=4,
@@ -86,7 +86,7 @@
 			literate=,
 }
 
-\lstdefinestyle{special}{
+\lstdefinestyle{special}{%
 			basicstyle=\ttfamily,
 			autogobble,
 			tabsize=4,
@@ -102,11 +102,11 @@
 			moredelim=**[is][\color{SynBlue}]{|}{|},
 }
 
-\lstnewenvironment{pythoncode}[1][language=python]{
+\lstnewenvironment{pythoncode}[1][language=python]{%
 	\lstset{frameround = Fttt,
 		style = full,
 		#1,
-	}
+	}%
 }{}
 
 \newcommand{\pyi}[2][full]{%

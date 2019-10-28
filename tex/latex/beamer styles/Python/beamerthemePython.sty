@@ -20,6 +20,7 @@
 
 \usetikzlibrary{calc, positioning, fit}
 
+
 \lstdefinestyle{output}{
 	basicstyle = \ttfamily,
 	autogobble,
@@ -72,8 +73,8 @@
 	\lstinline[style=#1]{#2}%
 }
 
-\newcommand{\link}[2]{
-	\href{#1}{\color{Orange}#2}
+\newcommand{\link}[2]{%
+	\href{#1}{\color{Orange}#2}%
 }
 
 \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {};}
@@ -96,6 +97,7 @@
 	\end{enumerate}
 }
 
+\newcommand{\done}{\rlap{$\square$}\checkmark}%
 
 
 
