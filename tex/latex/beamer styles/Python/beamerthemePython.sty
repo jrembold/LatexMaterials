@@ -20,6 +20,7 @@
 
 \usetikzlibrary{calc, positioning}
 
+
 \lstdefinestyle{output}{
 	basicstyle = \ttfamily,
 	autogobble,
@@ -31,6 +32,7 @@
 	stringstyle = ,
 	numbers = none,
 	backgroundcolor = ,
+	moredelim=**[is][\color{SynBlue}]{|}{|},
 }
 
 \lstdefinestyle{slides}{
@@ -67,12 +69,12 @@
 	}
 }{}
 
-\newcommand{\pyi}[1]{%
-	\lstinline[style=slides]{#1}%
+\newcommand{\pyi}[2][slides]{%
+	\lstinline[style=#1]{#2}%
 }
 
-\newcommand{\link}[2]{
-	\href{#1}{\color{Orange}#2}
+\newcommand{\link}[2]{%
+	\href{#1}{\color{Orange}#2}%
 }
 
 \newenvironment{poll}{%
@@ -81,6 +83,7 @@
 	\end{enumerate}
 }
 
+\newcommand{\done}{\rlap{$\square$}\checkmark}%
 
 
 
