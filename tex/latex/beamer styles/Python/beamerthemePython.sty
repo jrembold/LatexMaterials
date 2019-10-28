@@ -18,7 +18,7 @@
 \setbeamertemplate{enumerate items}[default]
 \setbeamertemplate{itemize items}[default]
 
-\usetikzlibrary{calc, positioning}
+\usetikzlibrary{calc, positioning, fit}
 
 \lstdefinestyle{output}{
 	basicstyle = \ttfamily,
@@ -31,6 +31,7 @@
 	stringstyle = ,
 	numbers = none,
 	backgroundcolor = ,
+	moredelim=**[is][\color{SynBlue}]{|}{|},
 }
 
 \lstdefinestyle{slides}{
@@ -67,19 +68,35 @@
 	}
 }{}
 
-\newcommand{\pyi}[1]{%
-	\lstinline[style=slides]{#1}%
+\newcommand{\pyi}[2][slides]{%
+	\lstinline[style=#1]{#2}%
 }
 
 \newcommand{\link}[2]{
 	\href{#1}{\color{Orange}#2}
 }
 
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {};}
+\newcommand{\blocktext}[3]{%
+	\begin{tikzpicture}[overlay,remember picture]%
+		\draw[ultra thick, Teal, #1] (#2) -- (#3);
+	\end{tikzpicture}%
+}
+\let\olditem\item
+\newcommand{\correct}[1]{%
+	\olditem \tikz[remember picture, baseline]{%
+		\node<1->[anchor=base, inner sep=0pt, outer sep=0pt](ans){#1};
+		\node<2->[anchor=base, inner sep=2pt, outer sep=2pt, draw, very thick, Teal, rounded corners, fit={(ans)}] at (ans) {};
+	}
+}
+	%\item \tikzmark{tl}\alert<2->{#1}\tikzmark{tr}
 \newenvironment{poll}{%
 	\begin{enumerate}[A)]
 	}{%
 	\end{enumerate}
 }
+
+
 
 
 
