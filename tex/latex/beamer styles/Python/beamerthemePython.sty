@@ -18,7 +18,7 @@
 \setbeamertemplate{enumerate items}[default]
 \setbeamertemplate{itemize items}[default]
 
-\usetikzlibrary{calc, positioning, fit}
+\usetikzlibrary{calc, positioning, fit, tikzmark}
 
 
 \lstdefinestyle{output}{
@@ -77,19 +77,25 @@
 	\href{#1}{\color{Orange}#2}%
 }
 
-\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {};}
 \newcommand{\blocktext}[3]{%
 	\begin{tikzpicture}[overlay,remember picture]%
 		\draw[ultra thick, Teal, #1] (#2) -- (#3);
 	\end{tikzpicture}%
 }
-\let\olditem\item
 \newcommand{\correct}[1]{%
-	\olditem \tikz[remember picture, baseline]{%
-		\node<1->[anchor=base, inner sep=0pt, outer sep=0pt](ans){#1};
-		\node<2->[anchor=base, inner sep=2pt, outer sep=2pt, draw, very thick, Teal, rounded corners, fit={(ans)}] at (ans) {};
-	}
+	\item \tikzmark{start}#1\tikzmark{stop}
+		\begin{tikzpicture}[overlay, remember picture]%
+			\node<2>[anchor=baseline, draw, very thick, Teal, rounded corners, inner sep=6pt, fit={([yshift=1.6ex,xshift=-6mm]pic cs:start) (pic cs:stop)}] {};
+		\end{tikzpicture}%
 }
+
+%\let\olditem\item
+%\newcommand{\correct}[1]{%
+	%\tikz[remember picture, baseline]{%
+		%\node<1->[anchor=base, inner sep=0pt, outer sep=0pt](ans){\olditem #1};
+		%\node<2->[anchor=base, inner sep=2pt, outer sep=2pt, draw, very thick, Teal, rounded corners, fit={(ans)}] at (ans) {};
+	%}
+%}
 	%\item \tikzmark{tl}\alert<2->{#1}\tikzmark{tr}
 \newenvironment{poll}{%
 	\begin{enumerate}[A)]
@@ -100,6 +106,34 @@
 \newcommand{\done}{\rlap{$\square$}\checkmark}%
 
 
+
+
+
+
+\usepackage{tcolorbox}
+
+\defbeamertemplateparent{blocks}[framed]{block begin,block end}[1][]
+{[#1]}
+
+\defbeamertemplate{block begin}{framed}[1][]
+{
+  \begin{tcolorbox}[%
+    colback=BG,%
+    colframe=Blue,%
+	arc=2mm,%
+	coltitle=Blue,
+	]%
+    {\vskip\smallskipamount%
+      \raggedright\usebeamerfont*{block title}%
+      \usebeamercolor[fg]{title}\insertblocktitle}%
+    \vskip\smallskipamount%
+    \raggedright%
+    \usebeamerfont{block body}%
+  }
+
+\defbeamertemplate{block end}{framed}[1][] {\end{tcolorbox}}
+
+\setbeamertemplate{blocks}[framed]
 
 
 
