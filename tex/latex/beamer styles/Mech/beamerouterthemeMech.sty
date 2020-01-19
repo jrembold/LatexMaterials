@@ -47,16 +47,59 @@
   (0,0) circle[radius=#6]
 }
 
-\tikzset{pics/test/.style n args={5}{
+%\tikzset{pics/gear/.style n args={5}{
+		%code={
+			%\fill[pic actions] 
+			%(0:#2)
+			%\foreach \i [evaluate=\i as \n using {\i-1)*360/#1}] in {1,...,#1}{%
+				%arc (\n:\n+#4:#2) {[rounded corners=1.5pt] -- (\n+#4+#5:#3)
+				%arc (\n+#4+#5:\n+360/#1-#5:#3)} --  (\n+360/#1:#2)
+			%}%
+			%(0,0) circle[radius=#2*0.5];
+		%}
+	%}
+%}
+\tikzset{
+    clip even odd rule/.code={\pgfseteorule}, % Credit to Andrew Stacey 
+    invclip/.style={
+        clip,insert path=
+            [clip even odd rule]{
+                [reset cm](-\maxdimen,-\maxdimen)rectangle(\maxdimen,\maxdimen)
+            }
+    },
+	pics/gear/.style n args={5}{
 		code={
-			\fill[pic actions] 
-		  (0:#2)
-		  \foreach \i [evaluate=\i as \n using {\i-1)*360/#1}] in {1,...,#1}{%
-			arc (\n:\n+#4:#2) {[rounded corners=1.5pt] -- (\n+#4+#5:#3)
-			arc (\n+#4+#5:\n+360/#1-#5:#3)} --  (\n+360/#1:#2)
-		  }%
-		  (0,0) circle[radius=1];
+			\pgfmathsetmacro{\teeth}{#1}
+			\pgfmathsetmacro{\iradius}{#2}
+			\pgfmathsetmacro{\oradius}{#3+\iradius}
+			\pgfmathsetmacro{\angtooth}{(360/\teeth/2*3/4}
+			\pgfmathsetmacro{\angbevel}{\iradius*2}
+
+			\pgfmathsetmacro{\spokes}{#4}
+			\pgfmathsetmacro{\spang}{360/\spokes}
+			\pgfmathsetmacro{\voidang}{(360-\spokes*20)/\spokes/2}
+
+			\begin{pgfinterruptboundingbox}
+			\foreach \s in {0,\spang,...,360}{%
+				\clip[invclip,rounded corners=\iradius*3] (\s:0.1*\iradius) -- (\s+\voidang:0.8*\iradius) arc (\s+\voidang:\s-\voidang:0.8*\iradius) -- cycle;
 			}
+				\clip[invclip] (0,0) circle (0.05*\iradius);
+			\end{pgfinterruptboundingbox}
+
+
+			\draw[pic actions] 
+			(0:\iradius)
+			\foreach \i [evaluate=\i as \n using {(\i-1)*360/\teeth}] in {1,...,\teeth}{%
+				arc (\n:\n+\angtooth:\iradius) {[rounded corners=1.5pt] -- (\n+\angtooth+\angbevel:\oradius)
+				arc (\n+\angtooth+\angbevel:\n+360/\teeth-\angbevel:\oradius)} --  (\n+360/\teeth:\iradius)
+			};%
+
+			\foreach \s in {0,\spang,...,360}{%
+				\draw[pic actions, rounded corners=\iradius*3] (\s:0.1*\iradius) -- (\s+\voidang:0.8*\iradius) arc (\s+\voidang:\s-\voidang:0.8*\iradius) -- cycle;
+			}
+				\draw[pic actions] (0,0) circle (0.05*\iradius);
+			
+		}
 	}
 }
 
@@ -81,7 +124,12 @@
 			%\shadedraw[thick, top color=Teal, bottom color=Teal!50] (.4,8.5) --++(.3,0) --++(-.2,-.4) --++(.2,.1) --++(-.3,-.7)
 			%--++(.05,.4) --++(-.2,-.05) -- cycle;
 			%\fill[red, even odd rule] \gear{10}{1}{1.2}{10}{2}{0.25};
-			\pic[draw, fill=red, even odd rule] at (0,0) {gear={10}{1}{1.2}};
+			\pic[rotate=\insertframenumber*10, draw, fill=DarkRed] at (0,\the\paperheight) {gear={23}{.8}{0.2}{3}};
+			\pic[rotate=-5-\insertframenumber*18, draw, fill=Teal] at (1,7.9) {gear={13}{.5}{0.1}{4}};
+			\pic[rotate=-5+\insertframenumber*21, draw, fill=Orange] at (0.28,7.18) {gear={11}{.4}{0.08}{2}};
+			\pic[rotate=78-\insertframenumber*21, draw, fill=Red] at (0.31,6.24) {gear={11}{.4}{0.08}{5}};
+			\pic[rotate=55+\insertframenumber*26, draw, fill=DarkTeal] at (1.08,6.05) {gear={9}{.3}{0.08}{2}};
+			\pic[rotate=155+\insertframenumber*26, draw, fill=Orange] at (0.44,5.53) {gear={9}{.2}{0.07}{3}};
 		\end{tikzpicture}
 	\end{beamercolorbox}
 }
