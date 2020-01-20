@@ -3,6 +3,8 @@
 % Any required packages
 \RequirePackage{tikz}
 
+\usetikzlibrary{calc, positioning, fit, tikzmark}
+
 % Settings
 \useinnertheme{rounded}
 \useoutertheme{Mech}
@@ -13,5 +15,20 @@
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{blocks}[rounded][shadow=false]
 \setbeamertemplate{enumerate items}[default]
+
+\newenvironment{poll}{%
+	\begin{enumerate}[A)]
+	}{%
+	\end{enumerate}
+}
+
+\newcommand{\correct}[1]{%
+	\item \tikzmark{start}#1\tikzmark{stop}
+		\begin{tikzpicture}[overlay, remember picture]%
+			\node<2>[anchor=baseline, draw, very thick, Teal, rounded corners, inner sep=6pt, fit={([yshift=1.6ex,xshift=-6mm]pic cs:start) (pic cs:stop)}] {};
+		\end{tikzpicture}%
+}
+
+
 
 \mode<all>
