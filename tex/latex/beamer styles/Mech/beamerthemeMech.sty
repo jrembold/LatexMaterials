@@ -2,6 +2,7 @@
 
 % Any required packages
 \RequirePackage{tikz}
+\RequirePackage{soul}
 
 \usetikzlibrary{calc, positioning, fit, tikzmark}
 
@@ -16,12 +17,36 @@
 \setbeamertemplate{blocks}[rounded][shadow=false]
 \setbeamertemplate{enumerate items}[default]
 
+% Question Counters
+\newcounter{questionnumber}
+\newcommand{\qnum}{%
+	\stepcounter{questionnumber}%
+	Q\arabic{questionnumber}
+}
+\resetcounteronoverlays{questionnumber}
+
+% Easier to see derivative dots
+\RequirePackage{accents}
+\renewcommand{\dot}[1]{%
+	\accentset{\mbox{\fontsize{4}{4}\selectfont\bfseries $\bullet$}}{#1}
+}
+\renewcommand{\ddot}[1]{%
+	\accentset{\mbox{\fontsize{4}{4}\selectfont\bfseries $\bullet$\hspace{-0.25ex}$\bullet$}}{#1}
+}
+
+% Polling environment with letters
 \newenvironment{poll}{%
 	\begin{enumerate}[A)]
 	}{%
 	\end{enumerate}
 }
 
+% Nicer strikeout overlay support
+\newcommand<>{\St}[1]{
+	\alt#2{\beameroriginal{\st}{#1}{#1}}
+}
+
+% The below correct command does not work well
 \newcommand{\correct}[1]{%
 	\item \tikzmark{start}#1\tikzmark{stop}
 		\begin{tikzpicture}[overlay, remember picture]%

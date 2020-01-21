@@ -1,0 +1,176 @@
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tikz-3dplot}
+
+\pgfplotsset{compat=1.16}
+
+% Needed Tikz libraries
+\usetikzlibrary{patterns, decorations.pathmorphing, calc, intersections, hobby, decorations.markings}
+
+% Common Physics Symbols
+\newcommand{\force}{\va*{F}}
+\newcommand{\xhat}{\vu*{x}}
+\newcommand{\yhat}{\vu*{y}}
+\newcommand{\zhat}{\vu*{z}}
+\newcommand{\rhat}{\vu*{r}}
+\newcommand{\pos}{\va*{r}}
+\newcommand{\unit}[1]{\vu{#1}}
+\newcommand{\posp}{\va*{r}^\prime}
+\newcommand{\com}{\va{R}}
+\newcommand{\mom}{\va{p}}
+\newcommand{\amom}{\va{L}}
+
+\DeclareMathOperator{\Lagr}{\mathcal{L}}
+
+
+%\newcommand{\vell}{\va*{\ell}}
+%\newcommand{\vA}{\va{A}}
+%\newcommand{\vel}{\va{v}}
+%\newcommand{\sr}{\va{\srvec}}
+%\newcommand{\srhat}{\vu{\srvec}}
+%\newcommand{\ef}{\va{E}}
+%\newcommand{\mf}{\va{B}}
+%\newcommand{\ed}{\va{D}}
+%\newcommand{\pol}{\va{P}}
+%\newcommand{\cur}{\va*{\mathcal{I}}}
+%\newcommand{\mcur}{\mathcal{I}}
+%\newcommand{\scd}{\va{K}}
+%\newcommand{\vcd}{\va{J}}
+%\newcommand{\vmag}{\va{M}}
+%\newcommand{\af}{\va{H}}
+%\newcommand{\emf}{\mathcal{E}}
+
+% New Tikz Commands
+\newcommand{\unifield}[4]{
+	\fill[#4] (-.5,-.5) rectangle (#1+.5,#2+.5);
+	\foreach \x in {0,1,...,#1}{
+		\foreach \y in {0,1,...,#2}{
+			\node at (\x,\y) {#3};
+		}
+	}
+}
+
+% Tikz Styles
+\tikzstyle{nosep} = [inner sep=0pt, outer sep=0pt]
+\tikzstyle{point}[2mm] = [circle, fill=black, inner sep=0pt, outer sep=2pt, minimum size=#1]
+\tikzstyle{force} = [red, ultra thick, -latex]
+\tikzstyle{vel} = [green, ultra thick, -latex]
+\tikzstyle{ground}[1cm] = [pattern=north east lines, minimum width=#1, minimum height=3mm, inner sep=0pt, outer sep=0pt, transform shape]
+\tikzstyle{wall}[1cm] = [pattern=north east lines, minimum height=#1, minimum width=3mm, inner sep=0pt, outer sep=0pt, transform shape]
+\tikzstyle{block}[red!50] = [draw, ultra thick, fill=#1, rounded corners, minimum size=1cm, inner sep=0pt, outer sep=0pt, transform shape]
+\tikzstyle{spring}[2mm] = [decorate, decoration={coil, aspect=0.3, segment length=#1, amplitude=3mm}, very thick]
+\tikzstyle{ball}[red!50] = [circle, ball color=#1, inner sep=0pt, outer sep=0pt, minimum size=1cm]
+\tikzstyle{math}=[execute at begin node={$\displaystyle}, execute at end node={$}]
+\tikzstyle{shorten <>}=[shorten >=#1, shorten <=#1]
+
+\tikzstyle{ncharge} = [circle, draw, thick, cyan, fill=cyan!40, transform shape]
+\tikzstyle{pcharge} = [circle, draw, thick, red, fill=red!40, transform shape]
+
+\tikzset{
+  double arrow/.style args={#1 colored by #2 and #3}{
+    -stealth,line width=#1,#2, % first arrow
+    postaction={draw,-stealth,#3,line width=(#1)/2,
+                shorten <=(#1)/4,shorten >=2*(#1)/4}, % second arrow
+  }
+}
+\tikzset{->-/.style={decoration={
+			markings,
+	mark=at position #1 with {\arrow{latex}}}, postaction={decorate}}
+}
+\tikzset{-<-/.style={decoration={
+			markings,
+	mark=at position #1 with {\arrow[rotate=180]{latex}}}, postaction={decorate}}
+}
+\tikzset{->>-/.style args={#1 to #2 by #3}{
+		decoration={
+			markings,
+			mark = between positions #1 and #2 step #3 with {\arrow{latex}}
+		}, postaction={decorate}
+	}
+}
+
+\tikzstyle{xzplane}=[canvas is zx plane at y=#1]
+\tikzstyle{yzplane}=[canvas is zy plane at x=#1]
+\tikzstyle{xyplane}=[canvas is yx plane at z=#1]
+
+\tikzset{pics/plus/.style={
+		code={
+			\foreach \a in {0,90,180,270} {
+				\draw[ultra thick, line cap=round, Red] (0,0) -- +(\a:1.2mm);
+			}
+		}
+	}
+}
+\tikzset{pics/minus/.style={
+		code={
+			\foreach \a in {0,180} {
+				\draw[ultra thick, line cap=round, cyan] (0,0) -- +(\a:1.0mm);
+			}
+		}
+	}
+}
+\tikzset{pics/box/.style args={#1/#2/#3/#4}{
+		code={
+			% Giving names for clarity
+			\def\width{#2}
+			\def\height{#3}
+			\def\depth{#4}
+			% Defining corner nodes for outside use
+			\node[nosep] (-fbl) at (0,0,\depth) {};
+			\node[nosep] (-fbr) at (\width,0,\depth) {};
+			\node[nosep] (-ftl) at (0,\height,\depth) {};
+			\node[nosep] (-ftr) at (\width,\height,\depth) {};
+			\node[nosep] (-bbl) at (0,0,0) {};
+			\node[nosep] (-bbr) at (\width,0,0) {};
+			\node[nosep] (-btl) at (0,\height,0) {};
+			\node[nosep] (-btr) at (\width,\height,0) {};
+			\draw[very thick, fill=#1, line join=round]
+				(0,0,\depth) --++ (\width,0,0) --++ (0,\height,0) --++ (-\width,0,0) --cycle;
+			\draw[very thick, fill=#1!50, line join=round]
+				(0,\height,\depth) --++ (\width,0,0) --++ (0,0,-\depth) --++ (-\width,0,0) --cycle;
+			\draw[very thick, fill=#1!50!black, line join=round]
+				(\width,0,\depth) --++ (0,\height,0) --++ (0,0,-\depth) --++ (0,-\height,0) --cycle;
+			\draw[very thick, dashed]
+				(0,0,0) -- +(0,0,\depth) (0,0,0) -- +(\width,0,0) (0,0,0) -- +(0,\height,0);
+		}
+	},
+	% Defaults to a cyan cube
+	pics/box/.default=cyan/1/1/1
+}
+\tikzset{pics/cyl/.style args={#1/#2/#3/#4}{
+		code = {
+			\def\rad{#2}
+			\def\ang{#4}
+			\pgfmathsetmacro{\tilt}{\rad/\ang}
+			\def\len{#3}
+			\draw[very thick, left color=#1!70, right color=#1]
+			(0,0)++(-\rad,0) coordinate(-lt) -- ++(0,-\len) coordinate (-lb) arc (180:360:\rad cm and \tilt cm) coordinate[pos=.5] (-b) coordinate (-rb) -- ++(0,\len) coordinate (-rt) -- cycle;
+			\draw[very thick, right color=#1!80, left color=#1!50] (0,0) ellipse (\rad cm and \tilt cm);
+		}
+	},
+	pics/cyl/.default=red/1/3/3
+}
+
+\tikzset{pics/lightoff/.style={
+		code={
+			\node[transform shape] at (0,0) {\includegraphics[width=1.1cm]{lightoff.pdf}};
+			\node[inner sep=0pt, outer sep=0pt] (-p1) at (-1mm,-8mm) {};
+			\node[inner sep=0pt, outer sep=0pt] (-p2) at (1mm,-8mm) {};
+		}
+	}
+}
+
+
+%PGF Styles
+\pgfplotsset{simple/.style={%
+  axis x line = middle,
+  axis y line = middle,
+  xtick = \empty,
+  ytick = \empty,
+  %every axis x label/.style={at={(current axis.right of origin)}, anchor=west},
+  %every axis y label/.style={at={(current axis.north west)}},
+  every axis x label/.style={at={(ticklabel* cs:1.02)}, anchor=west},
+  every axis y label/.style={at={(ticklabel* cs:1.02)}, anchor=south},
+}}
