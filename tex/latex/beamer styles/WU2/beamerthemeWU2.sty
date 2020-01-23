@@ -28,6 +28,12 @@
 	\setbeamertemplate{background}{}
 }
 
+\newif\ifsol
+\solfalse
+\DeclareOption{sols}{\soltrue}
+\ProcessOptions
+
+% Section Slides
 \AtBeginSection[]{
 	{
 	\setbeamertemplate{footline}{}
@@ -42,5 +48,26 @@
 	\end{frame}
 	}
 }
+
+
+% Solutions at bottom right of slides
+\newcommand{\exsol}[1]{
+	\ifsol{%
+	\begin{tikzpicture}[remember picture, overlay]
+		\node<2>[anchor=east, yshift=5mm, font=\scriptsize] at (current page.south east) {\textbf{Solution:} #1};
+	\end{tikzpicture}
+	}\fi
+	\pnote{Solution: #1}
+}
+
+
+
+\newenvironment{poll}
+{%
+	\begin{enumerate}[A)]
+}{%
+	\end{enumerate}
+}
+
 
 \mode<all>
