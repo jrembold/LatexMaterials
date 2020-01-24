@@ -3,6 +3,7 @@
 % Any required packages
 \RequirePackage{tikz}
 \RequirePackage{soul}
+\RequirePackage[duration=60, fontsize=24, starttime=10:20]{pdfpcnotes}
 
 \usetikzlibrary{calc, positioning, fit, tikzmark}
 
@@ -54,6 +55,19 @@
 		\end{tikzpicture}%
 }
 
+% Flags to show solutions
+\newif\ifsol
+\solfalse
+\DeclareOption{sols}{\soltrue}
+\ProcessOptions
 
+\newcommand{\exsol}[1]{
+	\ifsol{%
+	\begin{tikzpicture}[remember picture, overlay]
+		\node<+->[anchor=south east, xshift=-7mm, yshift=1mm, font=\scriptsize] at (current page.south east) {\textbf{Solution:} #1};
+	\end{tikzpicture}
+	}\fi
+	\pnote{Solution: #1}
+}
 
 \mode<all>
