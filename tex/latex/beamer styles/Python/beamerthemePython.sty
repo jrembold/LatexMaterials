@@ -7,6 +7,7 @@
 \RequirePackage{lstautogobble}
 \RequirePackage{textcomp}
 \RequirePackage{etoolbox}
+\RequirePackage[duration=60, fontsize=24, starttime=10:20]{pdfpcnotes}
 
 % Settings
 \useinnertheme{rounded}
@@ -60,7 +61,8 @@
 			numbers=none,
 			numberstyle=\color{gray},
 			moredelim={[s][\color{Blue}]{@}{@}},
-}
+			moredelim=**[is][\color<+>{SynBlue}]{|}{|},
+		}
 
 \lstnewenvironment{pythoncode}[1][language=python]{
 	\lstset{frameround = Fttt,
@@ -89,14 +91,23 @@
 		\end{tikzpicture}%
 }
 
-%\let\olditem\item
-%\newcommand{\correct}[1]{%
-	%\tikz[remember picture, baseline]{%
-		%\node<1->[anchor=base, inner sep=0pt, outer sep=0pt](ans){\olditem #1};
-		%\node<2->[anchor=base, inner sep=2pt, outer sep=2pt, draw, very thick, Teal, rounded corners, fit={(ans)}] at (ans) {};
-	%}
-%}
-	%\item \tikzmark{tl}\alert<2->{#1}\tikzmark{tr}
+
+
+% Flags to show solutions
+\newif\ifsol
+\solfalse
+\DeclareOption{sols}{\soltrue}
+\ProcessOptions
+
+\newcommand{\exsol}[1]{
+	\ifsol{%
+	\begin{tikzpicture}[remember picture, overlay]
+		\node<+->[anchor=south east, xshift=-1mm, yshift=4mm, font=\scriptsize] at (current page.south east) {\textcolor{Orange}{\textbf{Solution:}} #1};
+	\end{tikzpicture}
+	}\fi
+	\pnote{Solution: #1}
+}
+
 \newenvironment{poll}{%
 	\begin{enumerate}[A)]
 	}{%
