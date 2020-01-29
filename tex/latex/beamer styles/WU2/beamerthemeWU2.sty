@@ -2,6 +2,9 @@
 
 % Any required packages
 \RequirePackage{tikz,etoolbox}
+\RequirePackage[duration=60, fontsize=24]{pdfpcnotes}
+\RequirePackage{listings}
+\RequirePackage{lstautogobble}
 \usetikzlibrary{positioning,calc}
 
 % Settings
@@ -69,5 +72,39 @@
 	\end{enumerate}
 }
 
+\lstdefinestyle{slides}{
+			%backgroundcolor= \color{BG},
+			basicstyle=\ttfamily,
+			autogobble,
+			tabsize=3,
+			language=python,
+			upquote=true,
+			commentstyle= \color{gray}\itshape,
+			keywordstyle=\color{red}\bfseries,
+			showstringspaces=false,
+			stringstyle=\color{blue},
+			literate=%
+			{0}{{{\color{orange}0}}}1
+			{1}{{{\color{orange}1}}}1
+			{2}{{{\color{orange}2}}}1
+			{3}{{{\color{orange}3}}}1
+			{4}{{{\color{orange}4}}}1
+			{5}{{{\color{orange}5}}}1
+			{6}{{{\color{orange}6}}}1
+			{7}{{{\color{orange}7}}}1
+			{8}{{{\color{orange}8}}}1
+			{9}{{{\color{orange}9}}}1,
+			numbers=none,
+			numberstyle=\color{gray},
+			moredelim={[s][\color{green}]{@}{@}},
+			moredelim=**[is][\color<+>{green}]{|}{|},
+		}
+
+\lstnewenvironment{glowscript}[1][language=python]{
+	\lstset{frameround = Fttt,
+		style = slides,
+		#1,
+	}
+}{}
 
 \mode<all>
