@@ -107,4 +107,56 @@
 	}
 }{}
 
+
+
+% Common pics for slides
+
+\pgfdeclarehorizontalshading{PosNeg}{100bp}{color(0bp)=(blue!30); color(39bp)=(blue!30); color(61bp)=(red!30); color(100bp)=(red!30)}
+
+\tikzset{pics/dipole/.style args={#1}{
+		code = {
+			\begin{scope}[rotate=#1]
+				\draw[shading=PosNeg, shading angle=#1] (0,0)++(-.75,0) arc(180:90:.25cm) --++ (1,0) arc (90:-90:0.25cm) --++ (-1,0) arc (270:180:0.25cm);
+				\coordinate (m) at ($(0,0)+(-.5,0)$);
+				\coordinate (p) at ($(0,0)+(.5,0)$);
+				\node[cyan, anchor=center, font=\bf, transform shape, rotate=-#1] at (m) {-{}};
+				\node[red, anchor=center, font =\bf, transform shape, rotate=-#1] at (p) {+};
+			\end{scope}
+		}
+	}
+}
+
+\tikzset{pics/plus/.style={
+		code={
+			\foreach \a in {0,90,180,270} {
+				\draw[very thick, line cap=round, red] (0,0) -- +(\a:1.2mm);
+			}
+		}
+	}
+}
+
+\tikzset{pics/minus/.style={
+		code={
+			\foreach \a in {0,180} {
+				\draw[very thick, line cap=round, blue] (0,0) -- +(\a:1.0mm);
+			}
+		}
+	}
+}
+
+\tikzset{pics/ncharge/.style={
+		code={
+			\node[ball=blue!40, transform shape](n) at (0,0) {};
+			\pic[transform shape] at (0,0) {minus};
+		}
+	}
+}
+
+\tikzset{pics/pcharge/.style={
+		code={
+			\node[ball=red!40, transform shape](n) at (0,0) {};
+			\pic[transform shape] at (0,0) {plus};
+		}
+	}
+}
 \mode<all>
