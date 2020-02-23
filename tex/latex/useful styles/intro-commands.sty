@@ -5,6 +5,7 @@
 %\usepackage{sfmath}
 \usepackage{listings}
 \usepackage{lstautogobble}
+\usepackage{etoolbox}
 
 \pgfplotsset{compat=1.16}
 
@@ -215,9 +216,12 @@
 		%moredelim={[s][\color{green}]{@}{@}},
 	}
 
-\lstnewenvironment{glowscript}[1][language=python]{
-	\lstset{frameround = Fttt,
-		style = standard,
-		#1,
-	}
-}{}
+% Only define if not already defined
+\ifcsmacro{glowscript}{}{
+	\lstnewenvironment{glowscript}[1][language=python]{
+		\lstset{frameround = Fttt,
+			style = standard,
+			#1,
+		}
+	}{}
+}

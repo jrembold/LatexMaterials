@@ -100,12 +100,15 @@
 			moredelim=**[is][\color<+>{green}]{|}{|},
 		}
 
-\lstnewenvironment{glowscript}[1][language=python]{
-	\lstset{frameround = Fttt,
-		style = slides,
-		#1,
-	}
-}{}
+% Only define if not already defined
+\ifcsmacro{glowscript}{}{
+	\lstnewenvironment{glowscript}[1][language=python]{
+		\lstset{frameround = Fttt,
+			style = slides,
+			#1,
+		}
+	}{}
+}
 
 
 
