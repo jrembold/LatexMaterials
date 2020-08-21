@@ -57,7 +57,7 @@
 \newcommand{\exsol}[1]{
 	\ifsol{%
 	\begin{tikzpicture}[remember picture, overlay]
-		\node<+->[anchor=east, yshift=5mm, font=\scriptsize] at (current page.south east) {\textbf{Solution:} #1};
+		\node<+->[anchor=south east, yshift=3mm, font=\scriptsize, align=left] at (current page.south east) {\textbf{Solution:} #1};
 	\end{tikzpicture}
 	}\fi
 	\pnote{Solution: #1}

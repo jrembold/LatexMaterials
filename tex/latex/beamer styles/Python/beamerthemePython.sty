@@ -7,7 +7,9 @@
 \RequirePackage{lstautogobble}
 \RequirePackage{textcomp}
 \RequirePackage{etoolbox}
-\RequirePackage[duration=60, fontsize=24, starttime=10:20]{pdfpcnotes}
+\RequirePackage[skins]{tcolorbox}
+\RequirePackage[duration=60, fontsize=24, starttime=13:00]{pdfpcnotes}
+
 
 % Settings
 \useinnertheme{rounded}
@@ -20,6 +22,7 @@
 \setbeamertemplate{itemize items}[default]
 
 \usetikzlibrary{calc, positioning, fit, tikzmark}
+\tcbuselibrary{listings}
 
 
 \lstdefinestyle{output}{
@@ -34,6 +37,33 @@
 	numbers = none,
 	backgroundcolor = ,
 	moredelim=**[is][\color{SynBlue}]{|}{|},
+}
+
+\lstdefinestyle{idle}{
+	basicstyle=\ttfamily,
+	autogobble,
+	tabsize=3,
+	language=python,
+	upquote=true,
+	commentstyle= \color{gray}\itshape,
+	keywordstyle=\color{Red}\bfseries,
+	showstringspaces=false,
+	stringstyle=\color{SynPurple},
+	literate=%
+	*{0}{{{\color{SynOrange}0}}}1
+	{1}{{{\color{SynOrange}1}}}1
+	{2}{{{\color{SynOrange}2}}}1
+	{3}{{{\color{SynOrange}3}}}1
+	{4}{{{\color{SynOrange}4}}}1
+	{5}{{{\color{SynOrange}5}}}1
+	{6}{{{\color{SynOrange}6}}}1
+	{7}{{{\color{SynOrange}7}}}1
+	{8}{{{\color{SynOrange}8}}}1
+	{9}{{{\color{SynOrange}9}}}1
+	{>>>}{{{\color{SynBlue}>>>}}}3,
+	numbers=none,
+	numberstyle=\color{gray},
+	moredelim={[is][\color{FG}]{_}{_}},
 }
 
 \lstdefinestyle{slides}{
@@ -121,11 +151,10 @@
 
 
 
-\usepackage[skins]{tcolorbox}
+% Redefining the basic block style -----------------------------
 
 \defbeamertemplateparent{blocks}[framed]{block begin,block end}[1][]
 {[#1]}
-
 \defbeamertemplate{block begin}{framed}[1][]
 {
   \begin{tcolorbox}[%
@@ -146,10 +175,22 @@
     \raggedright%
 	\usebeamerfont{block body}\usebeamercolor[fg]{block body}%
   }
-
 \defbeamertemplate{block end}{framed}[1][] {\end{tcolorbox}}
-
 \setbeamertemplate{blocks}[framed]
+
+% IDLE Code Frame --------------------------------------------
+\newtcblisting{idle}[1][]{
+	colback=BG,
+	colframe=Purple,
+	fontupper=\color{FG},
+	fonttitle=\bfseries,
+	title=IDLE,
+	colbacktitle=BG,
+	center title,
+	listing only,
+	listing style = idle,
+	#1,%
+}
 
 
 
