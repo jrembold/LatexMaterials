@@ -3,15 +3,17 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{tikz-3dplot}
+%\usepackage{tikz-network}
 \usepackage{listings}
 \usepackage{lstautogobble}
 \usepackage{textcomp}
 \usepackage{lmodern}
+\usepackage{monokai-colors}
 
 \pgfplotsset{compat=1.16}
 
 % Needed Tikz libraries
-\usetikzlibrary{patterns, decorations.pathmorphing, calc, intersections, hobby, decorations.markings, shapes, positioning}
+\usetikzlibrary{patterns, decorations.pathmorphing, calc, intersections, hobby, decorations.markings, shapes, positioning, fit}
 
 \definecolor{Blue}{HTML}{21BFC2}
 \definecolor{Green}{HTML}{09F7A0}
@@ -72,6 +74,25 @@
 			literate=,
 }
 
+\lstdefinestyle{syntax}{
+			mathescape=true,
+			backgroundcolor= \color{gray!20},
+			basicstyle=\ttfamily\bfseries,
+			autogobble,
+			tabsize=4,
+			language=python,
+			upquote=true,
+			commentstyle= \color{SynBlue}\itshape,
+			keywordstyle=\color{SynRed}\bfseries,
+			showstringspaces=false,
+			stringstyle=\color{SynPurple},
+			moredelim=[is][\normalfont\itshape]{|}{|},
+			numbers=none,
+			columns=fullflexible,
+			deletekeywords=[2]{format},
+}
+
+
 \lstdefinestyle{min}{%
 			backgroundcolor= \color{gray!15},
 			basicstyle=\ttfamily,
@@ -101,7 +122,23 @@
 			numbers=none,
 			numberstyle=,
 			literate=,
-			moredelim=**[is][\color{SynBlue}]{|}{|},
+			moredelim=**[is][\color{SynBlue}\itshape]{|}{|},
+}
+
+\lstdefinestyle{pseudo}{%
+			basicstyle=\ttfamily,
+			autogobble,
+			tabsize=4,
+			upquote=true,
+			showstringspaces=false,
+			commentstyle=,
+			keywordstyle=,
+			showstringspaces=false,
+			stringstyle=,
+			numbers=none,
+			numberstyle=,
+			literate=,
+			moredelim=**[is][\color{SynBlue}\itshape\rmfamily]{|}{|},
 }
 
 \lstnewenvironment{pythoncode}[1][language=python]{%
@@ -112,6 +149,34 @@
 }{}
 
 \newcommand{\pyi}[2][full]{%
-	\lstset{style=#1}%
-	\lstinline{#2}%
+	\lstinline[style=#1, mathescape]{#2}%
+}
+
+\newcommand{\pyisyn}[1]{%
+	\pyi[syntax]{#1}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% KAREL COMMANDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\karelgrid}[3][]{%
+	\def\w{#2}
+	\def\h{#3}
+	\foreach \x in {1,...,\w} {
+		\foreach \y in {1,...,\h} {
+			\node[#1] at (\x,\y) {+};
+		}
+	}
+	\draw[very thick, #1] (0.5, 0.5) rectangle +(\w,\h);
+	\foreach \x in {1,...,\w} \node[font=\small, #1] at (\x,0) {\x};
+	\foreach \y in {1,...,\h} \node[font=\small, #1] at (0,\y) {\y};
+}
+
+\newcommand{\karelmark}[4][]{%
+	\draw[fill=white, rotate around={#4:(#2,#3)}, #1] (#2,#3)+(-.3,.3)--+(0,.3)--+(.3,0)--+(0,-.3)--+(-.3,-.3) -- cycle;
+}
+
+\newcommand{\karelbeeper}[3][]{%
+	\def\size{0.35}
+	\draw[fill=gray!50, #1] (#2,#3)+(\size,0)--+(0,-\size)--+(-\size,0)--+(0,\size)--cycle;
 }
