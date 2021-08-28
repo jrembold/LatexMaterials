@@ -12,16 +12,21 @@
 \RequirePackage{physics}
 \RequirePackage{booktabs}
 \RequirePackage{tcolorbox}
+\RequirePackage{verbatim}
+
 
 
 % TA Notes Toggle
+\newif\ifshow
 \newtoggle{forTA}
 \DeclareOption{TA}{\toggletrue{forTA}}
 \ProcessOptions\relax
+\iftoggle{forTA}{\showtrue}{\showfalse}
 
 % Checkpoint counter for easy reference
 \newcounter{checkCounter}
 \addtocounter{checkCounter}{1}
+% Practice problem counter
 \newcounter{intCount}
 \addtocounter{intCount}{1}
 
@@ -37,7 +42,10 @@
 			language=python,
 			upquote=true,
 			#1
-	}}{}
+	}
+}{}
+
+% This style removes color
 \lstnewenvironment{plainCode}[1][language=python]{
 	\lstset{frame=none,
 			backgroundcolor=\color{gray!10},
@@ -52,7 +60,11 @@
 			language=python,
 			upquote=true,
 			#1
-	}}{}
+	}
+}{}
+
+% This style lets you use pipe symbols (|) as delimiters inside which
+% you can place pseudo code
 \lstdefinestyle{pseudo}{%
 			basicstyle=\ttfamily\color{RedOrange},
 			autogobble,
@@ -71,51 +83,9 @@
 \newcommand{\inlinePython}[1]{\textcolor{RedOrange}{\texttt{#1}}}
 
 % TA environments
-\newcommand{\tanotes}[1]{
-	\iftoggle{forTA}{
-		\par
-		\begin{tanotecontent}
-			#1
-		\end{tanotecontent}
-		%\begin{center}
-			%\framebox[6.5in]{\parbox{6.25in}{{\Large \textbf{TA Notes}:}\\ #1}}
-		%\end{center}
-	}%
-}
-
-% Checkpoint environment
-%\newcommand{\checkpoint}[1]{
-	%\par
-	%\begin{center}
-		%\framebox[6.5in]{\parbox{6.25in}{\textcolor{RoyalBlue}{{\Large\textbf{Checkpoint \arabic{checkCounter}}:}\\ #1}}}
-	%\end{center}
-	%\stepcounter{checkCounter}
-%}
-
-%\newcommand{\example}[1]{
-	%\par
-	%\begin{center}
-		%\color{PineGreen}%
-		%\framebox[6.5in]{\parbox{6.25in}{\textcolor{PineGreen}{{\Large\textbf{Practice \arabic{intCount}}:}\\ #1}}}
-	%\end{center}
-	%\stepcounter{intCount}
-%}
-
-\newtcolorbox[auto counter]{practice}[1][]{%
-	colframe=PineGreen, fonttitle=\bfseries\Large,
-	title=Practice~\thetcbcounter,
-	width=6.5in, before=\begin{center}, after=\end{center},
-	text width=6.25in,
-	colback=PineGreen!10,
-	#1 }
-
-\newtcolorbox[auto counter]{checkpoint}[1][]{%
-	colframe=RoyalBlue, fonttitle=\bfseries\Large,
-	title=Checkpoint~\thetcbcounter,
-	width=6.5in, before=\begin{center}, after=\end{center},
-	text width=6.25in,
-	colback=RoyalBlue!10,
-	#1 }
+\newenvironment{tanotes}%
+{\ifshow\expandafter\tanotecontent\else\expandafter\comment\fi}%
+{\ifshow\expandafter\endtanotecontent\else\expandafter\endcomment\fi}
 
 \newtcolorbox[]{tanotecontent}[1][]{%
 	colframe=red!50!black, fonttitle=\bfseries\Large,
@@ -125,9 +95,36 @@
 	colback=red!50!black!10,
 	#1 }
 
+% Checkpoint environment
+\newtcolorbox[auto counter]{checkpoint}[1][]{%
+	colframe=RoyalBlue, fonttitle=\bfseries\Large,
+	title=Checkpoint~\thetcbcounter,
+	width=6.5in, before=\begin{center}, after=\end{center},
+	text width=6.25in,
+	colback=RoyalBlue!10,
+	#1 }
+
+% Practice environment
+\newtcolorbox[auto counter]{practice}[1][]{%
+	colframe=PineGreen, fonttitle=\bfseries\Large,
+	title=Practice~\thetcbcounter,
+	width=6.5in, before=\begin{center}, after=\end{center},
+	text width=6.25in,
+	colback=PineGreen!10,
+	#1 }
+
+% Recap! environment
+\newtcolorbox[]{recap}[1][]{%
+	colframe=Plum, fonttitle=\bfseries\Large,
+	title=Let's Recap!!,
+	width=6.5in, before=\begin{center}, after=\end{center},
+	text width=6.25in,
+	colback=Plum!10,
+	#1 }
+
 
 % Convenience Commands
-\newcommand{\Glowscript}{\href{http://www.glowscript.org}{Glowscript }}
+\newcommand{\Glowscript}{\href{http://www.glowscript.org}{Glowscript}}
 \newcommand{\numvec}[1]{$\langle {#1} \rangle$}
 \newcommand{\Class}{Physics 221}
 \newcommand{\emphasize}[1]{\textcolor{RoyalBlue}{\textbf{#1}}}
