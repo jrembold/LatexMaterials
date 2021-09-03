@@ -54,6 +54,18 @@
 			markings,
 	mark=at position #1 with {\arrow{latex}}}, postaction={decorate}}
 }
+
+\tikzset{endnode/.style n args={2}{decoration={
+			markings,
+			transform={xshift=3mm},
+			mark=at position 1 with {\node[#2] {#1};}
+		},
+		postaction={decorate},
+	},
+	endnode/.default={A}{a},
+}
+
+
 \tikzset{pics/battery/.style={
 		code={
 			\draw[top color=orange!40, bottom color=orange!40, middle color=white] (-2,-1) rectangle (2,1);
