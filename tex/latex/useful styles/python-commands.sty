@@ -60,6 +60,7 @@
 }
 
 \lstdefinestyle{basic}{%
+			backgroundcolor= \color{gray!15},
 			basicstyle=\ttfamily,
 			autogobble,
 			tabsize=4,
@@ -143,13 +144,13 @@
 
 \lstnewenvironment{pythoncode}[1][language=python]{%
 	\lstset{frameround = Fttt,
-		style = full,
+		style = basic,
 		#1,
 	}%
 }{}
 
-\newcommand{\pyi}[2][full]{%
-	\lstinline[style=#1, mathescape]{#2}%
+\newcommand{\pyi}[2][basic]{%
+	\lstinline[style=#1, mathescape]!#2!%
 }
 
 \newcommand{\pyisyn}[1]{%
