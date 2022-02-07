@@ -1,0 +1,139 @@
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{lstautogobble}
+\usepackage{textcomp}
+\usepackage{lmodern}
+
+\pgfplotsset{compat=1.16}
+
+% Needed Tikz libraries
+\usetikzlibrary{patterns, decorations.pathmorphing, calc, intersections, hobby, decorations.markings, shapes, positioning, fit}
+
+\definecolor{Frost1}{HTML}{8FBCBB}
+\definecolor{Frost2}{HTML}{88C0D0}
+\definecolor{Frost3}{HTML}{81A1C1}
+\definecolor{Frost4}{HTML}{5E81AC}
+\definecolor{Green}{HTML}{A3BE8C}
+\definecolor{DGreen}{HTML}{6D805E}
+\definecolor{Red}{HTML}{BF616A}
+\definecolor{Orange}{HTML}{D08770}
+\definecolor{Purple}{HTML}{B48EAD}
+\definecolor{DGray}{HTML}{2E3440}
+\definecolor{White}{HTML}{E5E9F0}
+
+\lstdefinestyle{basic}{
+			backgroundcolor= \color{White},
+			basicstyle=\ttfamily\color{DGray},
+			autogobble,
+			tabsize=2,
+			language=SQL,
+			upquote=true,
+			commentstyle= \color{Purple}\itshape,
+			keywordstyle=\color{Frost4}\bfseries,
+			showstringspaces=false,
+			stringstyle=\color{DGreen},
+			numbers=none,
+			numberstyle=\color{Frost1},
+			morekeywords={show, database, real, double, precision, serial, percentile_cont, mode, text},
+}
+
+%\lstdefinestyle{basic}{%
+			%backgroundcolor= \color{gray!15},
+			%basicstyle=\ttfamily,
+			%autogobble,
+			%tabsize=4,
+			%language=python,
+			%upquote=true,
+			%commentstyle= \color{Blue}\itshape,
+			%keywordstyle=\color{Red}\bfseries,
+			%showstringspaces=false,
+			%stringstyle=\color{SynPurple},
+			%numbers=none,
+			%numberstyle=\color{gray},
+			%literate=,
+%}
+
+%\lstdefinestyle{syntax}{
+			%mathescape=true,
+			%backgroundcolor= \color{gray!20},
+			%basicstyle=\ttfamily\bfseries,
+			%autogobble,
+			%tabsize=4,
+			%language=python,
+			%upquote=true,
+			%commentstyle= \color{SynBlue}\itshape,
+			%keywordstyle=\color{SynRed}\bfseries,
+			%showstringspaces=false,
+			%stringstyle=\color{SynPurple},
+			%moredelim=[is][\normalfont\itshape]{|}{|},
+			%numbers=none,
+			%columns=fullflexible,
+			%deletekeywords=[2]{format},
+%}
+
+
+%\lstdefinestyle{min}{%
+			%backgroundcolor= \color{gray!15},
+			%basicstyle=\ttfamily,
+			%autogobble,
+			%tabsize=4,
+			%upquote=true,
+			%showstringspaces=false,
+			%commentstyle= \color{black}\itshape,
+			%keywordstyle=\color{black}\bfseries,
+			%showstringspaces=false,
+			%stringstyle=\color{black},
+			%numbers=none,
+			%numberstyle=\color{black},
+			%literate=,
+%}
+
+%\lstdefinestyle{special}{%
+			%basicstyle=\ttfamily,
+			%autogobble,
+			%tabsize=4,
+			%upquote=true,
+			%showstringspaces=false,
+			%commentstyle=,
+			%keywordstyle=,
+			%showstringspaces=false,
+			%stringstyle=,
+			%numbers=none,
+			%numberstyle=,
+			%literate=,
+			%moredelim=**[is][\color{SynBlue}\itshape]{|}{|},
+%}
+
+%\lstdefinestyle{pseudo}{%
+			%basicstyle=\ttfamily,
+			%autogobble,
+			%tabsize=4,
+			%upquote=true,
+			%showstringspaces=false,
+			%commentstyle=,
+			%keywordstyle=,
+			%showstringspaces=false,
+			%stringstyle=,
+			%numbers=none,
+			%numberstyle=,
+			%literate=,
+			%moredelim=**[is][\color{SynBlue}\itshape\rmfamily]{|}{|},
+%}
+
+\lstnewenvironment{sql}[1][]{%
+	\lstset{frameround = Fttt,
+		style = basic,
+		#1,
+	}%
+}{}
+
+\newcommand{\sqli}[2][basic]{%
+	\lstinline[style=#1, mathescape]!#2!%
+}
+
+\newcommand{\sqlsyn}[1]{%
+	\pyi[syntax]{#1}%
+}
+
