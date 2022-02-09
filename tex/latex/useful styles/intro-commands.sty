@@ -189,7 +189,8 @@
 
 
 % Listings Theming
-\lstdefinestyle{standard}{
+\lstdefinestyle{standard}{%
+			mathescape=true,
 			backgroundcolor= \color{gray!15},
 			basicstyle=\ttfamily,
 			autogobble,
@@ -199,22 +200,32 @@
 			commentstyle= \color{gray}\itshape,
 			keywordstyle=\color{red}\bfseries,
 			showstringspaces=false,
-			stringstyle=\color{yellow},
-			literate=%
-			{0}{{{\color{blue}0}}}1
-			{1}{{{\color{blue}1}}}1
-			{2}{{{\color{blue}2}}}1
-			{3}{{{\color{blue}3}}}1
-			{4}{{{\color{blue}4}}}1
-			{5}{{{\color{blue}5}}}1
-			{6}{{{\color{blue}6}}}1
-			{7}{{{\color{blue}7}}}1
-			{8}{{{\color{blue}8}}}1
-			{9}{{{\color{blue}9}}}1,
+			stringstyle=\color{blue!50!black},
+			%moredelim=[is][\normalfont\itshape]{|}{|},
 			numbers=none,
-			numberstyle=\color{gray},
-			moredelim={[s][\color{green}]{@}{@}},
+			%numberstyle=\color{gray},
 		}
+
+\lstdefinestyle{highlight}{
+  keywordstyle=\color{red},
+  commentstyle=\color{gray},
+  stringstyle=\color{blue!50!black},
+}
+
+\lstdefinestyle{uncover}{%
+  language=python,
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily\color{black!40},
+  autogobble,
+  tabsize=3,
+  upquote=true,
+  keywordstyle=\color{red!40}\bfseries,
+  commentstyle=\color{gray!40}\itshape,
+  stringstyle=\color{blue!50!black!40},
+  showstringspaces=false,
+  moredelim=**[il][\only<+>{\color{black}\lstset{style=highlight}}]{@},
+}
+
 
 \lstdefinestyle{bw}{
 		backgroundcolor= \color{gray!15},
