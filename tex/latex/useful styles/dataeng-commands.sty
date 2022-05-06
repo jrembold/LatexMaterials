@@ -36,9 +36,24 @@
 			stringstyle=\color{DGreen},
 			numbers=none,
 			numberstyle=\color{Frost1},
-			morekeywords={show, database, real, double, precision, serial, percentile_cont, mode, text, with},
+			morekeywords={show, database, real, double, precision, serial, percentile_cont, mode, text, with, references},
 }
 
+\lstdefinestyle{min}{
+			backgroundcolor= \color{White},
+			basicstyle=\ttfamily\color{DGray},
+			autogobble,
+			tabsize=2,
+			language=SQL,
+			upquote=true,
+			commentstyle= \itshape,
+			keywordstyle=\bfseries,
+			showstringspaces=false,
+			stringstyle=,
+			numbers=none,
+			numberstyle=,
+			morekeywords={show, database, real, double, precision, serial, percentile_cont, mode, text, with, references},
+}
 %\lstdefinestyle{basic}{%
 			%backgroundcolor= \color{gray!15},
 			%basicstyle=\ttfamily,
@@ -131,6 +146,10 @@
 
 \newcommand{\sqli}[2][basic]{%
 	\lstinline[style=#1, mathescape]!#2!%
+}
+
+\newcommand{\sqlinm}[2][basic]{%
+	\lstinline[style=#1]!#2!%
 }
 
 \newcommand{\sqlsyn}[1]{%
