@@ -1,0 +1,110 @@
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{lstautogobble}
+\usepackage{textcomp}
+\usepackage{lmodern}
+
+\pgfplotsset{compat=1.16}
+
+% Needed Tikz libraries
+\usetikzlibrary{patterns, decorations.pathmorphing, calc, intersections, hobby, decorations.markings, shapes, positioning, fit}
+
+\definecolor{Red}{HTML}{8c4351}
+\definecolor{Yellow}{HTML}{8f5e15}
+\definecolor{Green}{HTML}{33635c}
+\definecolor{Cyan}{HTML}{0f4b6e}
+\definecolor{Blue}{HTML}{34548a}
+\definecolor{Purple}{HTML}{5a4a78}
+\definecolor{Black}{HTML}{343b58}
+\definecolor{White}{HTML}{d5d6db}
+
+
+\lstdefinestyle{text}{
+			backgroundcolor= \color{White},
+			basicstyle=\ttfamily\color{Black},
+			autogobble,
+			tabsize=2,
+			language={},
+			upquote=true,
+			commentstyle= \color{Purple}\itshape,
+			keywordstyle=\color{Blue}\bfseries,
+			showstringspaces=false,
+			stringstyle=\color{Green},
+			numbers=none,
+			numberstyle=\color{Red},
+			morekeywords={},
+			mathescape=true,
+}
+
+\lstdefinestyle{bash}{
+			backgroundcolor= \color{White},
+			basicstyle=\ttfamily\color{Black},
+			autogobble,
+			tabsize=2,
+			language=bash,
+			upquote=true,
+			commentstyle= \color{Purple}\itshape,
+			keywordstyle=\color{Blue}\bfseries,
+			showstringspaces=false,
+			stringstyle=\color{Green},
+			numbers=none,
+			numberstyle=\color{Red},
+			morekeywords={},
+			mathescape=true,
+}
+
+\lstdefinestyle{min}{
+			backgroundcolor= \color{White},
+			basicstyle=\ttfamily\color{Black},
+			autogobble,
+			tabsize=2,
+			language=bash,
+			upquote=true,
+			commentstyle= \itshape,
+			keywordstyle=\bfseries,
+			showstringspaces=false,
+			stringstyle=,
+			numbers=none,
+			numberstyle=,
+			morekeywords={},
+}
+
+\lstdefinestyle{syntax}{
+			mathescape=true,
+			backgroundcolor= \color{White},
+			basicstyle=\ttfamily\bfseries,
+			autogobble,
+			tabsize=4,
+			language=bash,
+			upquote=true,
+			commentstyle= \color{Purple}\itshape,
+			keywordstyle=\color{Blue}\bfseries,
+			showstringspaces=false,
+			stringstyle=\color{Green},
+			moredelim=[is][\normalfont\itshape]{|}{|},
+			numbers=none,
+			columns=fullflexible,
+			deletekeywords=[2]{format},
+}
+
+\lstnewenvironment{bash}[1][]{%
+	\lstset{frameround = Fttt,
+		style = bash,
+		#1,
+	}%
+}{}
+
+\newcommand{\code}[2][text]{%
+	\lstinline[style=#1, mathescape]!#2!%
+}
+
+%\newcommand{\sqlinm}[2][basic]{%
+	%\lstinline[style=#1]!#2!%
+%}
+
+\newcommand{\sqlsyn}[1]{%
+	\pyi[syntax]{#1}%
+}
+
