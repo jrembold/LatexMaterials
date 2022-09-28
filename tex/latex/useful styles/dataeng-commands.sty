@@ -23,6 +23,10 @@
 \definecolor{DGray}{HTML}{2E3440}
 \definecolor{White}{HTML}{E5E9F0}
 
+\newcommand{\style}{basic}
+\DeclareOption{bw}{\renewcommand{\style}{min}}
+\ProcessOptions\relax
+
 \lstdefinestyle{basic}{
 			backgroundcolor= \color{White},
 			basicstyle=\ttfamily\color{DGray},
@@ -36,12 +40,12 @@
 			stringstyle=\color{DGreen},
 			numbers=none,
 			numberstyle=\color{Frost1},
-			morekeywords={show, database, real, double, precision, serial, percentile_cont, mode, text, with, references},
+			morekeywords={show, database, real, double, precision, serial, percentile_cont, mode, text, with, references, within, ilike},
 			mathescape=true,
 }
 
 \lstdefinestyle{min}{
-			backgroundcolor= \color{White},
+			backgroundcolor= \color{White!75},
 			basicstyle=\ttfamily\color{DGray},
 			autogobble,
 			tabsize=2,
@@ -53,7 +57,7 @@
 			stringstyle=,
 			numbers=none,
 			numberstyle=,
-			morekeywords={show, database, real, double, precision, serial, percentile_cont, mode, text, with, references},
+			morekeywords={show, database, real, double, precision, serial, percentile_cont, mode, text, with, references, within, ilike},
 }
 %\lstdefinestyle{basic}{%
 			%backgroundcolor= \color{gray!15},
@@ -140,16 +144,16 @@
 
 \lstnewenvironment{sql}[1][]{%
 	\lstset{frameround = Fttt,
-		style = basic,
+		style = \style,
 		#1,
 	}%
 }{}
 
-\newcommand{\sqli}[2][basic]{%
+\newcommand{\sqli}[2][\style]{%
 	\lstinline[style=#1, mathescape]!#2!%
 }
 
-\newcommand{\sqlinm}[2][basic]{%
+\newcommand{\sqlinm}[2][\style]{%
 	\lstinline[style=#1]!#2!%
 }
 
