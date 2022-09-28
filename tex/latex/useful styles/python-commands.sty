@@ -8,6 +8,7 @@
 \usepackage{lstautogobble}
 \usepackage{textcomp}
 \usepackage{lmodern}
+\usepackage[most]{tcolorbox}
 \usepackage{monokai-colors}
 
 \pgfplotsset{compat=1.16}
@@ -157,6 +158,30 @@
 \newcommand{\pyisyn}[1]{%
 	\pyi[syntax]{#1}%
 }
+
+%%%% TERMINAL OUTPUT %%%%
+\tcbuselibrary{listings}
+\newtcblisting{termout}[2][]{%
+	listing only,
+	arc=1mm,
+	listing options = {style=min, autogobble},
+	title = {\textrangle~python #2},
+	attach title to upper = {\smallskip},
+	%detach title,
+	%before upper={\textbf{\textrangle} \texttt{python} \tcbtitle\newline},
+	coltitle = black!70,
+	fonttitle = \tt,
+	#1
+}
+
+
+
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% KAREL COMMANDS
