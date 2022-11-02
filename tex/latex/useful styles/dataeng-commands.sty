@@ -149,11 +149,23 @@
 	}%
 }{}
 
-\newcommand{\sqli}[2][\style]{%
+\lstnewenvironment{Rscript}[1][]{%
+	\lstset{frameround = Fttt,
+		style = basic,
+		language = R,
+		#1,
+	}%
+}{}
+
+\newcommand{\sqli}[2][basic]{%
 	\lstinline[style=#1, mathescape]!#2!%
 }
 
-\newcommand{\sqlinm}[2][\style]{%
+\newcommand{\Rcode}[2][basic]{%
+	\lstinline[style=#1, language=R, mathescape]!#2!%
+}
+
+\newcommand{\sqlinm}[2][basic]{%
 	\lstinline[style=#1]!#2!%
 }
 
