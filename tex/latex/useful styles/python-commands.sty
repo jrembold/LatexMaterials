@@ -34,6 +34,10 @@
 
 \definecolor{LightBG}{HTML}{FDF0ED}
 
+\newcommand{\style}{basic}
+\DeclareOption{bw}{\renewcommand{\style}{min}}
+\ProcessOptions\relax
+
 \lstdefinestyle{full}{
 			backgroundcolor= \color{gray!20},
 			basicstyle=\ttfamily,
@@ -146,12 +150,12 @@
 
 \lstnewenvironment{pythoncode}[1][language=python]{%
 	\lstset{frameround = Fttt,
-		style = basic,
+		style = \style,
 		#1,
 	}%
 }{}
 
-\newcommand{\pyi}[2][basic]{%
+\newcommand{\pyi}[2][\style]{%
 	\lstinline[style=#1, mathescape]!#2!%
 }
 
