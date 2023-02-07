@@ -9,20 +9,21 @@
 \usepackage{textcomp}
 \usepackage{lmodern}
 \usepackage[most]{tcolorbox}
-\usepackage{monokai-colors}
+%\usepackage{monokai-colors}
+\usepackage{atom_one_light}
 
 \pgfplotsset{compat=1.16}
 
 % Needed Tikz libraries
 \usetikzlibrary{patterns, decorations.pathmorphing, calc, intersections, hobby, decorations.markings, shapes, positioning, fit}
 
-\definecolor{Blue}{HTML}{21BFC2}
-\definecolor{Green}{HTML}{09F7A0}
-\definecolor{Teal}{HTML}{27D796}
-\definecolor{Red}{HTML}{F43E5C}
-\definecolor{Orange}{HTML}{FAB28E}
-\definecolor{Purple}{HTML}{6C6F93}
-\definecolor{DGray}{HTML}{1A1C23}
+%\definecolor{Blue}{HTML}{21BFC2}
+%\definecolor{Green}{HTML}{09F7A0}
+%\definecolor{Teal}{HTML}{27D796}
+%\definecolor{Red}{HTML}{F43E5C}
+%\definecolor{Orange}{HTML}{FAB28E}
+%\definecolor{Purple}{HTML}{6C6F93}
+%\definecolor{DGray}{HTML}{1A1C23}
 
 
 \definecolor{SynBlue}{HTML}{1D8991}
@@ -39,60 +40,59 @@
 \ProcessOptions\relax
 
 \lstdefinestyle{full}{
-			backgroundcolor= \color{gray!20},
-			basicstyle=\ttfamily,
+			backgroundcolor= \color{BG},
+			basicstyle=\ttfamily\color{Black},
 			autogobble,
 			tabsize=4,
 			language=python,
 			upquote=true,
-			commentstyle= \color{SynBlue}\itshape,
-			keywordstyle=\color{SynRed}\bfseries,
+			commentstyle= \color{Gray}\itshape,
+			keywordstyle=\color{Purple}\bfseries,
 			showstringspaces=false,
-			stringstyle=\color{SynPurple},
+			stringstyle=\color{Green},
 			literate=%
-			{0}{{{\color{SynOrange}0}}}1
-			{1}{{{\color{SynOrange}1}}}1
-			{2}{{{\color{SynOrange}2}}}1
-			{3}{{{\color{SynOrange}3}}}1
-			{4}{{{\color{SynOrange}4}}}1
-			{5}{{{\color{SynOrange}5}}}1
-			{6}{{{\color{SynOrange}6}}}1
-			{7}{{{\color{SynOrange}7}}}1
-			{8}{{{\color{SynOrange}8}}}1
-			{9}{{{\color{SynOrange}9}}}1,
+			{0}{{{\color{Orange}0}}}1
+			{1}{{{\color{Orange}1}}}1
+			{2}{{{\color{Orange}2}}}1
+			{3}{{{\color{Orange}3}}}1
+			{4}{{{\color{Orange}4}}}1
+			{5}{{{\color{Orange}5}}}1
+			{6}{{{\color{Orange}6}}}1
+			{7}{{{\color{Orange}7}}}1
+			{8}{{{\color{Orange}8}}}1
+			{9}{{{\color{Orange}9}}}1,
 			numbers=left,
 			numberstyle=\color{gray},
 }
 
 \lstdefinestyle{basic}{%
-			backgroundcolor= \color{gray!15},
-			basicstyle=\ttfamily,
-			backgroundcolor= \color{gray!20},
+			backgroundcolor= \color{BG},
+			basicstyle=\ttfamily\color{Black},
 			autogobble,
 			tabsize=4,
 			language=python,
 			upquote=true,
-			commentstyle= \color{Blue}\itshape,
-			keywordstyle=\color{Red}\bfseries,
+			commentstyle= \color{Gray}\itshape,
+			keywordstyle=\color{Purple}\bfseries,
 			showstringspaces=false,
-			stringstyle=\color{SynPurple},
+			stringstyle=\color{Green},
 			numbers=none,
-			numberstyle=\color{gray},
+			numberstyle=\color{FG},
 			literate=,
 }
 
 \lstdefinestyle{syntax}{
 			mathescape=true,
-			backgroundcolor= \color{gray!20},
-			basicstyle=\ttfamily\bfseries,
+			backgroundcolor= \color{BG},
+			basicstyle=\ttfamily\color{Black},
 			autogobble,
 			tabsize=4,
 			language=python,
 			upquote=true,
-			commentstyle= \color{SynBlue}\itshape,
-			keywordstyle=\color{SynRed}\bfseries,
+			commentstyle= \color{Gray}\itshape,
+			keywordstyle=\color{Purple}\bfseries,
 			showstringspaces=false,
-			stringstyle=\color{SynPurple},
+			stringstyle=\color{Green},
 			moredelim=[is][\normalfont\itshape]{|}{|},
 			numbers=none,
 			columns=fullflexible,
@@ -101,8 +101,8 @@
 
 
 \lstdefinestyle{min}{%
-			backgroundcolor= \color{gray!15},
-			basicstyle=\ttfamily,
+			backgroundcolor= \color{BG},
+			basicstyle=\ttfamily\color{FG},
 			autogobble,
 			tabsize=4,
 			upquote=true,
@@ -129,7 +129,7 @@
 			numbers=none,
 			numberstyle=,
 			literate=,
-			moredelim=**[is][\color{SynBlue}\itshape]{|}{|},
+			moredelim=**[is][\color{Cyan}\itshape]{|}{|},
 }
 
 \lstdefinestyle{pseudo}{%
@@ -145,7 +145,7 @@
 			numbers=none,
 			numberstyle=,
 			literate=,
-			moredelim=**[is][\color{SynBlue}\itshape\rmfamily]{|}{|},
+			moredelim=**[is][\color{Cyan}\itshape\rmfamily]{|}{|},
 }
 
 \lstnewenvironment{pythoncode}[1][language=python]{%
