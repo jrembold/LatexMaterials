@@ -207,7 +207,7 @@
 	\def\h{#3}
 	\foreach \x in {1,...,\w} {
 		\foreach \y in {1,...,\h} {
-			\node[#1] at (\x,\y) {+};
+			\node[#1,font=\scriptsize] at (\x,\y) {+};
 		}
 	}
 	\draw[very thick, #1] (0.5, 0.5) rectangle +(\w,\h);
